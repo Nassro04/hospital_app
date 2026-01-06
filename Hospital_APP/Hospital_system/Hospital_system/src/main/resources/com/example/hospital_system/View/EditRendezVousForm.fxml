@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="650.0" prefWidth="500.0" style="-fx-background-color: #f5f7fa;"
+            stylesheets="@../styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hospital_system.Controllers.EditRendezVousController">
+
+    <!-- HEAD -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15"
+              style="-fx-background-color: linear-gradient(to right, #004d40, #00695c); -fx-padding: 20;">
+            <Label text="Modification Rendez-vous" textFill="WHITE"
+                   style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+
+    <!-- CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 0;">
+            <content>
+                <VBox spacing="15" style="-fx-padding: 30; -fx-background-color: transparent;">
+
+                    <!-- Patient Info Section -->
+                    <Label text="Informations Patient"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #004d40;"/>
+
+                    <VBox spacing="5">
+                        <Label text="Nom *" styleClass="label-form"/>
+                        <TextField fx:id="nomField" promptText="Nom du patient"
+                                   styleClass="text-field-modern"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Prénom *" styleClass="label-form"/>
+                        <TextField fx:id="prenomField" promptText="Prénom du patient"
+                                   styleClass="text-field-modern"/>
+                    </VBox>
+
+                    <HBox spacing="15">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Téléphone *" styleClass="label-form"/>
+                            <TextField fx:id="telephoneField" promptText="06..."
+                                       styleClass="text-field-modern"/>
+                        </VBox>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="CIN *" styleClass="label-form"/>
+                            <TextField fx:id="cinField" promptText="AB123456"
+                                       styleClass="text-field-modern"/>
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="5">
+                        <Label text="Age *" styleClass="label-form"/>
+                        <TextField fx:id="ageField" promptText="Age" maxWidth="Infinity" styleClass="text-field-modern"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Genre *" styleClass="label-form"/>
+                        <ComboBox fx:id="genreComboBox" promptText="Sélectionner..."
+                                  maxWidth="Infinity" styleClass="combo-box-modern"/>
+                    </VBox>
+
+                    <Region prefHeight="10"/>
+
+                    <!-- Consultation Info Section -->
+                    <Label text="Détails Consultation"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #004d40;"/>
+
+                    <VBox spacing="5">
+                        <Label text="Département" styleClass="label-form"/>
+                        <ComboBox fx:id="departmentComboBox" promptText="Sélectionner..."
+                                  maxWidth="Infinity" styleClass="combo-box-modern"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Médecin *" styleClass="label-form"/>
+                        <ComboBox fx:id="doctorComboBox" promptText="Sélectionner un médecin"
+                                  maxWidth="Infinity" styleClass="combo-box-modern"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Date *" styleClass="label-form"/>
+                        <DatePicker fx:id="dateField" maxWidth="Infinity"
+                                    styleClass="date-picker-modern"
+                                    promptText="Sélectionner une date"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Heure *" styleClass="label-form"/>
+                        <ComboBox fx:id="timeComboBox" maxWidth="Infinity"
+                                  promptText="Sélectionner un créneau"
+                                  styleClass="combo-box-modern"/>
+                    </VBox>
+
+
+
+                    <Label fx:id="errorText" text="" textFill="RED" visible="false" wrapText="true"
+                           style="-fx-padding: 10; -fx-background-color: #ffebee; -fx-border-color: #f44336; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <!-- FOOTER ACTIONS -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15"
+              style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0;">
+            <Button fx:id="cancelButton" text="Annuler" onAction="#handleCancel"
+                    styleClass="secondary-button" cancelButton="true"/>
+            <Button fx:id="saveButton" text="Enregistrer" onAction="#handleSave"
+                    styleClass="primary-button" defaultButton="true"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospital_system.Controllers.FactureDetailsController">
+   <left>
+      <VBox prefWidth="280.0" spacing="12.0" style="-fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef); -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0, 2, 0);" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onBack" style="-fx-background-color: #fff; -fx-text-fill: #004d40; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-weight: bold;" text="← Retour">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            
+            <VBox spacing="8" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 2);">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Gestion Articles">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Ajouter ou modifier" textFill="#6c757d">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  
+                  <TextField fx:id="itemDesignation" promptText="Désignation" style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="itemQty" promptText="Quantité" style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="itemPrice" promptText="Prix Unitaire (MAD)" style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </TextField>
+                  
+                  <Button fx:id="btnAddItem" mnemonicParsing="false" onAction="#onAddItem" prefWidth="230.0" style="-fx-background-color: linear-gradient(to right, #00bcd4, #26a69a); -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold; -fx-padding: 12;" text="Ajouter">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnDeleteItem" mnemonicParsing="false" onAction="#onDeleteItem" prefWidth="230.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold; -fx-padding: 12;" text="🗑️ Supprimer" visible="false">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            
+            <VBox spacing="8" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 2);">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Actions">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#onPrint" prefWidth="230.0" style="-fx-background-color: linear-gradient(to right, #004d40, #00695c); -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold; -fx-padding: 12;" text="📄 Imprimer / PDF">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #e9ecef;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="TOP_CENTER" style="-fx-background-color: #e9ecef; -fx-padding: 30;">
+               <children>
+                  <AnchorPane fx:id="invoiceContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="595.0" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 15, 0, 0, 3);">
+                     <children>
+                        <!-- Header -->
+                        <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="35.0" spacing="18.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="65.0" prefWidth="65.0" style="-fx-background-color: linear-gradient(to bottom right, #00897b, #004d40); -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,77,64,0.3), 8, 0, 0, 2);">
+                                 <children>
+                                    <Label text="H" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="38.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="HOSPITAL SYSTEM" textFill="#004d40">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Gestion Médicale Professionnelle" textFill="#78909c">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="TOP_RIGHT" layoutX="350.0" layoutY="35.0" spacing="3.0">
+                           <children>
+                              <Label text="00212 6 00 00 00 00" textFill="#004d40">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="contact@hospital.ma" textFill="#78909c">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                              <Label text="www.hospital-system.ma" textFill="#78909c">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Tanger, Maroc" textFill="#78909c">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Title Section with gradient -->
+                        <AnchorPane layoutX="40.0" layoutY="125.0" prefHeight="85.0" prefWidth="515.0" style="-fx-background-color: linear-gradient(to right, #00897b, #004d40); -fx-background-radius: 10;">
+                           <children>
+                              <Label layoutX="25.0" layoutY="22.0" text="FACTURE" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="34.0" />
+                                 </font>
+                              </Label>
+                              <VBox alignment="CENTER_RIGHT" layoutX="300.0" layoutY="15.0" prefWidth="200.0" spacing="3">
+                                 <children>
+                                    <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                                       <children>
+                                          <Label text="N° de facture :" textFill="#b2dfdb">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="invoiceIdLabel" text="ID-101" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                                       <children>
+                                          <Label text="Date :" textFill="#b2dfdb">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="invoiceDateLabel" text="25/12/2025" textFill="WHITE">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        
+                        <!-- Client Information Cards -->
+                        <HBox layoutX="40.0" layoutY="230.0" spacing="25.0">
+                           <children>
+                              <VBox prefWidth="245.0" spacing="8" style="-fx-background-color: #f5f5f5; -fx-background-radius: 8; -fx-padding: 18;">
+                                 <children>
+                                    <Label text="FACTURÉ À" textFill="#00897b">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="200.0" stroke="#e0e0e0" strokeWidth="1.5" />
+                                    <Label fx:id="clientNameLabel" text="CLIENT NAME" textFill="#263238">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="clientAddressLabel" text="CIN: ..." textFill="#607d8b">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="245.0" spacing="8" style="-fx-background-color: #f5f5f5; -fx-background-radius: 8; -fx-padding: 18;">
+                                 <children>
+                                    <Label text="EXPÉDIÉ À" textFill="#00897b">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="200.0" stroke="#e0e0e0" strokeWidth="1.5" />
+                                    <Label text="MÊME CLIENT" textFill="#263238">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Adresse identique" textFill="#607d8b">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        
+                        <!-- Enhanced Table -->
+                        <TableView fx:id="itemsTable" layoutX="40.0" layoutY="340.0" prefHeight="280.0" prefWidth="515.0" style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                          <columns>
+                            <TableColumn fx:id="colQty" prefWidth="70.0" style="-fx-alignment: CENTER; -fx-font-weight: bold;" text="QTÉ" />
+                            <TableColumn fx:id="colDesignation" prefWidth="250.0" text="DÉSIGNATION" />
+                              <TableColumn fx:id="colPrice" prefWidth="95.0" style="-fx-alignment: CENTER-RIGHT;" text="PRIX UNIT" />
+                              <TableColumn fx:id="colTotal" prefWidth="95.0" style="-fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;" text="MONTANT" />
+                          </columns>
+                        </TableView>
+                        
+                        <!-- Modern Totals Section -->
+                        <VBox layoutX="320.0" layoutY="640.0" prefWidth="235.0" spacing="8.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="60.0" style="-fx-padding: 8; -fx-background-color: #fafafa; -fx-background-radius: 6;">
+                                 <children>
+                                    <Label text="TOTAL HT" prefWidth="90.0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalHtLabel" alignment="CENTER_RIGHT" prefWidth="110.0" text="0.00 MAD" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-background-radius: 6;" alignment="CENTER_LEFT" spacing="60.0">
+                                 <children>
+                                    <Label text="TVA (14%)" prefWidth="90.0" textFill="#1976d2">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="tvaLabel" alignment="CENTER_RIGHT" prefWidth="110.0" text="0.00 MAD" textAlignment="RIGHT" textFill="#1976d2">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox style="-fx-background-color: linear-gradient(to right, #00897b, #004d40); -fx-padding: 12; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,77,64,0.3), 6, 0, 0, 2);" alignment="CENTER_LEFT" spacing="60.0">
+                                 <children>
+                                    <Label text="TOTAL TTC" textFill="WHITE" prefWidth="90.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalTtcLabel" alignment="CENTER_RIGHT" prefWidth="110.0" text="0.00 MAD" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Footer -->
+                        <VBox layoutX="40.0" layoutY="730.0" spacing="5">
+                           <children>
+                              <Label text="Arrêté la présente facture à la somme de :" textFill="#78909c">
+                                 <font>
+                                    <Font name="System Italic" size="11.0" />
+                                 </font>
+                              </Label>
+                              <Text fx:id="amountInWords" strokeType="OUTSIDE" strokeWidth="0.0" text="(Montant en lettres...)" wrappingWidth="300.0" fill="#607d8b">
+                                 <font>
+                                    <Font name="System Italic" size="11.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        
+                        <Label layoutX="180.0" layoutY="800.0" text="Merci de votre confiance !" textFill="#90a4ae">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        
+                        <SVGPath content="M10,50 Q40,10 70,40 T140,20" layoutX="400.0" layoutY="730.0" stroke="#b2dfdb" strokeWidth="2.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

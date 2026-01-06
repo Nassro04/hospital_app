@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospital_system.Controllers.FactureFormController">
+   <children>
+      <Label text="Nouvelle Facture" textFill="#004d40">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </Label>
+      <VBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0">
+         <children>
+            <Label text="Nom" />
+            <TextField fx:id="nomField" promptText="Entrez le nom" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0">
+         <children>
+            <Label text="Prénom" />
+            <TextField fx:id="prenomField" promptText="Entrez le prénom" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0">
+         <children>
+            <Label text="CIN" />
+            <TextField fx:id="cinField" promptText="Entrez le CIN" />
+         </children>
+      </VBox>
+      <Button mnemonicParsing="false" onAction="#onSave" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #00bcd4; -fx-text-fill: white; -fx-cursor: hand;" text="Enregistrer et Continuer">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#onCancel" style="-fx-background-color: transparent; -fx-text-fill: #777; -fx-underline: true; -fx-cursor: hand;" text="Annuler" />
+   </children>
+</VBox>
